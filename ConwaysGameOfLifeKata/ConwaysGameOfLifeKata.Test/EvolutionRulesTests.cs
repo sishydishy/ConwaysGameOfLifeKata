@@ -5,49 +5,32 @@ namespace ConwaysGameOfLifeKata.Test
 {
     public class EvolutionRulesTests
     {
-        [Fact]
-        public void GivenALiveCellWithTwoNeighboursThenLiveCellShouldLive()
+        
+        [Theory]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void GivenALiveCellWithTwoOrThreeNeighboursThenLiveCellShouldLive(int neighbour)
         {
             var liveEvolutionRules = new LiveEvolutionRules();
 
 
-            var result = liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(2);
+            var result = liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(neighbour);
 
             Assert.True(result);
         }
-        
-        
-        [Fact]
-        public void GivenALiveCellWithThreeNeighboursThenLiveCellShouldLive()
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(4)]
+        public void GivenALiveCellWithLessThanTwoOrMoreThanThreeNeighboursThenLiveCellShouldLive1(int neighbour)
         {
             var liveEvolutionRules = new LiveEvolutionRules();
 
 
-            var result = liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(3);
-
-            Assert.True(result);
-        }
-        
-        [Fact]
-        public void GivenALiveCellWithLessThanTwoNeighboursThenLiveCellShouldDie()
-        {
-            var liveEvolutionRules = new LiveEvolutionRules();
-
-
-            var result = liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(1);
+            var result = liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(neighbour);
 
             Assert.False(result);
         }
         
-        [Fact]
-        public void GivenALiveCellWithMoreThanThreeNeighboursThenLiveCellShouldDie()
-        {
-            var liveEvolutionRules = new LiveEvolutionRules();
-
-
-            var result = liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(4);
-
-            Assert.False(result);
-        }
     }
 }

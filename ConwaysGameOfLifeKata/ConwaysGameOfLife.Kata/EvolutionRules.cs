@@ -17,16 +17,7 @@ namespace ConwaysGameOfLifeKata.Kata
         
         public bool CellStateBasedOnNumberOfNeighbours(int neighbours)
         {
-            try
-            {
-                return _evolutionRulesDictionary[neighbours];
-                
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            
+            return _evolutionRulesDictionary.ContainsKey(neighbours) && _evolutionRulesDictionary.ContainsKey(neighbours);
         }
 
         
