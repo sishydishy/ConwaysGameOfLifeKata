@@ -17,8 +17,12 @@ namespace ConwaysGameOfLifeKata.Kata
         {
             X = 0;
             Y = 0;
+        }
 
-
+        public CellLocation(CellLocation addToCellLocation, int x, int y) : this(addToCellLocation.X + x,
+            addToCellLocation.Y + y)
+        {
+            
         }
 
 
@@ -26,13 +30,11 @@ namespace ConwaysGameOfLifeKata.Kata
         {
             X = x;
             Y = y;
-            
-            
         }
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            return ((CellLocation)obj).Key == Key;
         }
 
         public override int GetHashCode()

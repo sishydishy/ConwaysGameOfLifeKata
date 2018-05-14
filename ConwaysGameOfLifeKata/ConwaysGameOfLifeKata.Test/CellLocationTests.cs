@@ -22,6 +22,20 @@ namespace ConwaysGameOfLifeKata.Test
             
             Assert.Equal( "0,0", result );
         }
+
+        [Fact]
+        public void GivenACellLocationThenReturnNewCellLocation()
+        {
+            var cellLocation = new CellLocation(1,1);
+
+            var newCellLocation = new CellLocation(cellLocation, -1, -1);
+            
+            Assert.Equal("0,0", newCellLocation.ToString());
+ 
+            
+        }
+        
+        
         
     }
 }
