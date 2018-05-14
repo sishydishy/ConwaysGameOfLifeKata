@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using ConwaysGameOfLifeKata.Kata;
+using Xunit;
 
 namespace ConwaysGameOfLifeKata.Test
 {
@@ -7,7 +8,10 @@ namespace ConwaysGameOfLifeKata.Test
         [Fact]
         public void GivenEmptyWorldThenReturnAsTrue()
         {
-           
+            var world = new GameWorld();
+            var result = world.IsEmpty;
+            Assert.True(result);
+
         }
     }
 }

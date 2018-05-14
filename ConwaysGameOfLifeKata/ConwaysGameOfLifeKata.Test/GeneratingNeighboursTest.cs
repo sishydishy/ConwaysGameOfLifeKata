@@ -8,15 +8,12 @@ namespace ConwaysGameOfLifeKata.Test
     {
 
         [Fact]
-        public void GivenLiveCellThenGenerateAllSurroundingNeighbours1()
+        public void GivenLiveCellThenGenerateAllSurroundingNeighbours()
         {
             var generatingNeighbours = new GeneratingNeighbours();
             var cellLocation = new CellLocation(1, 1);
-           
-            var result = generatingNeighbours.GenerateSurroundingCells1(cellLocation);
-            
+            var result = generatingNeighbours.GenerateSurroundingCells(cellLocation);
             Assert.Equal(8, result.Count);
-
         } 
 }
 }

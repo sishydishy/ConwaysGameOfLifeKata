@@ -6,11 +6,11 @@ namespace ConwaysGameOfLifeKata.Kata
 {
     public class CellLocation
     {
-        //private readonly string _key;
+       
         private string Key => string.Format("{0},{1}", X, Y);
 
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int X { get; }
+        public int Y { get; }
 
 
         public CellLocation()
@@ -31,17 +31,6 @@ namespace ConwaysGameOfLifeKata.Kata
             X = x;
             Y = y;
         }
-
-        public override bool Equals(object obj)
-        {
-            return ((CellLocation)obj).Key == Key;
-        }
-
-        public override int GetHashCode()
-        {
-            return Key.GetHashCode();
-        }
-
         public override string ToString()
         {
             return Key;

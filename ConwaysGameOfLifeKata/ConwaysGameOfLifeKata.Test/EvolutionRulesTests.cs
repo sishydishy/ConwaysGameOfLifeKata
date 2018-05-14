@@ -1,3 +1,4 @@
+using ConwaysGameOfLife.Kata;
 using ConwaysGameOfLifeKata.Kata;
 using Xunit;
 
@@ -22,7 +23,7 @@ namespace ConwaysGameOfLifeKata.Test
         [Theory]
         [InlineData(1)]
         [InlineData(4)]
-        public void GivenALiveCellWithLessThanTwoOrMoreThanThreeNeighboursThenLiveCellShouldLive1(int neighbour)
+        public void GivenALiveCellWithLessThanTwoOrMoreThanThreeNeighboursThenLiveCellShouldDie(int neighbour)
         {
             var liveEvolutionRules = new LiveEvolutionRules();
 
@@ -31,6 +32,14 @@ namespace ConwaysGameOfLifeKata.Test
 
             Assert.False(result);
         }
-        
+
+        [Fact]
+        public void GivenADeadCellWithThreeNeighboursThenDeadCellShouldLive()
+        {
+            var deadEvolutionRules = new DeadEvolutionRules();
+
+            var result = deadEvolutionRules.CellStateBasedOnNumberOfNeighbours(3);
+            Assert.True(result);
+        }
     }
 }
