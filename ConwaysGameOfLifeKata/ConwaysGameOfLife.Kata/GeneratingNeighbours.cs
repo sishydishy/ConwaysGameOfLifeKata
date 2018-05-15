@@ -41,7 +41,7 @@ namespace ConwaysGameOfLifeKata.Test
             return !CreateKey(cellLocation).Equals(CreateKey(newCellLocation));
         }
 
-        private string CreateKey(CellLocation cellLocation)
+        public string CreateKey(CellLocation cellLocation)
         {
             return cellLocation.ToString();
         }

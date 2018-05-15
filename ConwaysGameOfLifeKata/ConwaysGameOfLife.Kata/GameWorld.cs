@@ -15,5 +15,23 @@ namespace ConwaysGameOfLifeKata.Kata
             LocationOfCellsInWorld = new Dictionary<string,CellLocation>();
         }
         public bool IsEmpty => !LocationOfCellsInWorld.Any();
+
+        public void AddCell(CellLocation cellLocation)
+        {
+            LocationOfCellsInWorld.Add(_generateCellLocationOfNeighbouringCells.CreateKey(cellLocation), cellLocation);
+        }
+
+        public int GetCellLocationsOfNeighbouringCells(CellLocation cellLocation)
+        {
+            var numberOfNeighbouringCells =
+                _generateCellLocationOfNeighbouringCells.GenerateSurroundingCells(cellLocation);
+            foreach (var neighbouringCellLocation in numberOfNeighbouringCells)
+            {
+                LocationOfCellsInWorld.Add(neighbouringCellLocation.Key,neighbouringCellLocation.Value);
+            }
+
+            return LocationOfCellsInWorld.Count;
+        }
+        
     }
 }
