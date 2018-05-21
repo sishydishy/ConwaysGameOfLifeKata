@@ -16,8 +16,8 @@ namespace ConwaysGameOfLifeKata.Kata
             Y = 0;
         }
 
-        public CellLocation(CellLocation addToCellLocation, int x, int y) : this(addToCellLocation.X + x,
-            addToCellLocation.Y + y)
+        public CellLocation(CellLocation updateCellLocation, int x, int y) : this(updateCellLocation.X + x,
+            updateCellLocation.Y + y)
         {
         }
 

@@ -20,7 +20,7 @@ namespace ConwaysGameOfLifeKata.Test
         {
             var gameEngine = new GameEngine();
             var cellLocation = new CellLocation();
-            gameEngine.gameWorld.AddCell(cellLocation);
+            gameEngine.initialGameWorld.AddCell(cellLocation);
             var result = gameEngine.Evolve();
             Assert.True(result.IsEmpty); 
         }
@@ -33,10 +33,10 @@ namespace ConwaysGameOfLifeKata.Test
             var cellLocation = new CellLocation(1,2);
             
 
-            gameEngine.gameWorld.AddCell(bottomCellLocation);
-            gameEngine.gameWorld.AddCell(cellLocation);
+            gameEngine.initialGameWorld.AddCell(bottomCellLocation);
+            gameEngine.initialGameWorld.AddCell(cellLocation);
            
-            var result = gameEngine.Evolve().LocationOfLivingCellsInWorld.Values.Count;
+            var result = gameEngine.Evolve().CellLocationsOfLivingCells.Values.Count;
             Assert.Equal(0,result);
         }
 
@@ -45,16 +45,16 @@ namespace ConwaysGameOfLifeKata.Test
         {
             var gameEngine = new GameEngine();
             var loc1 = new CellLocation(1, 1);
-            gameEngine.gameWorld.AddCell(loc1);
-            gameEngine.gameWorld.AddCell(new CellLocation(1,2));
-            gameEngine.gameWorld.AddCell(new CellLocation(1,3));
+            gameEngine.initialGameWorld.AddCell(loc1);
+            gameEngine.initialGameWorld.AddCell(new CellLocation(1,2));
+            gameEngine.initialGameWorld.AddCell(new CellLocation(1,3));
             
             var newNeighbour1 = new CellLocation(0,2);
             var newNeighbour2 = new CellLocation(2,2);
 
             
             
-            Assert.False(gameEngine.Evolve().LocationOfLivingCellsInWorld.ContainsValue(loc1));
+            Assert.False(gameEngine.Evolve().CellLocationsOfLivingCells.ContainsValue(loc1));
 
         }
     }

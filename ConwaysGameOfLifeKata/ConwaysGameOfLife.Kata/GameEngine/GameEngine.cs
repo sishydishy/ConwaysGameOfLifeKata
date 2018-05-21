@@ -7,36 +7,36 @@ namespace ConwaysGameOfLifeKata.Kata
     {
         private readonly LiveEvolutionRules _liveEvolutionRules;
         private readonly DeadEvolutionRules _deadEvolutionRules;
-        public GameWorld gameWorld { get; set; }
-        private readonly GeneratingNeighbours _generatingNeighbours = new GeneratingNeighbours();
+        public GameWorld initialGameWorld { get; set; }
+        private readonly NeighbourGenerator _neighbourGenerator = new NeighbourGenerator();
 
         public GameEngine()
         {
-            gameWorld = new GameWorld();
+            initialGameWorld = new GameWorld();
             _liveEvolutionRules = new LiveEvolutionRules();
             _deadEvolutionRules = new DeadEvolutionRules();
         }
 
         public GameWorld Evolve()
         {
-            var newWorld = new GameWorld();
-            Iterate(newWorld);
-            return newWorld;
+            var nextGenerationWorld = new GameWorld();
+            Iterate(nextGenerationWorld);
+            return nextGenerationWorld;
         }
 
         private void Iterate(GameWorld newWorld)
         {
-            foreach (var cellLocation in gameWorld.LocationOfLivingCellsInWorld.Values)
+            foreach (var cellLocation in initialGameWorld.CellLocationsOfLivingCells.Values)
             {
                 CheckLivingCellAgainstLiveEvolutionRules(newWorld, cellLocation);
-                DeadCellsOfCurrenCellAndCheckAgainstDeadEvolutionRules(newWorld, cellLocation);
+                CheckAgainstDeadEvolutionRules(newWorld, cellLocation);
             }
         }
 
         private void CheckLivingCellAgainstLiveEvolutionRules(GameWorld newWorld, CellLocation cellLocation)
         {
             var neighours =
-                gameWorld.CountNeighboursOf(
+                initialGameWorld.CountNeighboursOf(
                     cellLocation);
 
             if (_liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(neighours))
@@ -45,13 +45,13 @@ namespace ConwaysGameOfLifeKata.Kata
             }
         }
 
-        private void DeadCellsOfCurrenCellAndCheckAgainstDeadEvolutionRules(GameWorld newWorld, CellLocation cellLocation)
+        private void CheckAgainstDeadEvolutionRules(GameWorld newWorld, CellLocation cellLocation)
         {
-            var noCellsInLocation = _generatingNeighbours.GenerateSurroundingCells(cellLocation);
+            var noCellsInLocation = _neighbourGenerator.GenerateSurroundingCellLocations(cellLocation);
             foreach (var cells in noCellsInLocation.Values)
             {
                 var deadNeighours =
-                    gameWorld.CountNeighboursOf(
+                    initialGameWorld.CountNeighboursOf(
                         cells);
 
                 if (_deadEvolutionRules.CellStateBasedOnNumberOfNeighbours(deadNeighours))

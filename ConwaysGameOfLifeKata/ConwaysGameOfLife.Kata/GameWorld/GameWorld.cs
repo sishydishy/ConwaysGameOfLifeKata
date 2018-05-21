@@ -9,33 +9,33 @@ namespace ConwaysGameOfLifeKata.Kata
 {
     public class GameWorld
     {
-        private readonly GeneratingNeighbours _generateCellLocationOfNeighbouringCells;
-        public readonly Dictionary<string, CellLocation> LocationOfLivingCellsInWorld;
-        public bool IsEmpty => !LocationOfLivingCellsInWorld.Any();
+        private readonly NeighbourGenerator _surroundingCellLocations;
+        public readonly Dictionary<string, CellLocation> CellLocationsOfLivingCells;
+        public bool IsEmpty => !CellLocationsOfLivingCells.Any();
         
         public GameWorld()
         {
-            _generateCellLocationOfNeighbouringCells = new GeneratingNeighbours();
-            LocationOfLivingCellsInWorld = new Dictionary<string,CellLocation>();
+            _surroundingCellLocations = new NeighbourGenerator();
+            CellLocationsOfLivingCells = new Dictionary<string,CellLocation>();
         }
         
         public void AddCell(CellLocation cellLocation)
         {
             if (WorldDoesNotHaveCellAt(cellLocation))
             {
-                LocationOfLivingCellsInWorld.Add(_generateCellLocationOfNeighbouringCells.CreateKeyFrom(cellLocation), cellLocation);
+                CellLocationsOfLivingCells.Add(_surroundingCellLocations.CreateKeyFrom(cellLocation), cellLocation);
             }
         }
 
         public int CountNeighboursOf(CellLocation cellLocation)
         {
-            var numberOfNeighbouringCells = _generateCellLocationOfNeighbouringCells.GenerateSurroundingCells(cellLocation);
-            return numberOfNeighbouringCells.Keys.Intersect(LocationOfLivingCellsInWorld.Keys).Count();
+            var numberOfNeighbouringCells = _surroundingCellLocations.GenerateSurroundingCellLocations(cellLocation);
+            return numberOfNeighbouringCells.Keys.Intersect(CellLocationsOfLivingCells.Keys).Count();
         }
         
         private bool WorldDoesNotHaveCellAt(CellLocation cellLocation)
         {
-            return !LocationOfLivingCellsInWorld.ContainsKey(_generateCellLocationOfNeighbouringCells.CreateKeyFrom(cellLocation));
+            return !CellLocationsOfLivingCells.ContainsKey(_surroundingCellLocations.CreateKeyFrom(cellLocation));
         }
     }
 }

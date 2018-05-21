@@ -24,48 +24,48 @@ namespace ConwaysGameOfLife.Kata
             CreateBlockerPattern(myGame, new CellLocation(20, 10));
             CreateBlockerPattern(myGame, new CellLocation(20, 23));
             CreateBlockerPattern(myGame, new CellLocation(93, 25));
-            CreateToadPattern(myGame, new CellLocation(90,25));
-            
+            CreateToadPattern(myGame, new CellLocation(90, 25));
+
             while (true)
             {
-                myGame.gameWorld = myGame.Evolve();
-                Draw(myGame.gameWorld);
+                myGame.initialGameWorld = myGame.Evolve();
+                Draw(myGame.initialGameWorld);
                 Thread.Sleep(50);
             }
         }
 
         private static void CreateBlinkerPattern(GameEngine myGame, CellLocation location)
         {
-            myGame.gameWorld.AddCell(new CellLocation(location, 1, 1));
-            myGame.gameWorld.AddCell(new CellLocation(location, 1, 2));
-            myGame.gameWorld.AddCell(new CellLocation(location, 1, 3));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, 1));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, 2));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, 3));
         }
 
         private static void CreateBlockerPattern(GameEngine myGame, CellLocation location)
         {
-            myGame.gameWorld.AddCell(new CellLocation(location, 0, 0));
-            myGame.gameWorld.AddCell(new CellLocation(location, 1, 0));
-            myGame.gameWorld.AddCell(new CellLocation(location, 0, -1));
-            myGame.gameWorld.AddCell(new CellLocation(location, 1, -1));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 0, 0));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, 0));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 0, -1));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, -1));
         }
 
         private static void CreateToadPattern(GameEngine myGame, CellLocation location)
         {
-            myGame.gameWorld.AddCell(new CellLocation(location, 0, 0));
-            myGame.gameWorld.AddCell(new CellLocation(location, 0, 1));
-            myGame.gameWorld.AddCell(new CellLocation(location, 0, 2));
-            myGame.gameWorld.AddCell(new CellLocation(location, -1, 1));
-            myGame.gameWorld.AddCell(new CellLocation(location, -1, 2));
-            myGame.gameWorld.AddCell(new CellLocation(location, -1, 3));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 0, 0));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 0, 1));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 0, 2));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, -1, 1));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, -1, 2));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, -1, 3));
         }
 
         private static void CreateGliderPattern(GameEngine myGame, CellLocation location)
         {
-            myGame.gameWorld.AddCell(new CellLocation(location, 3, 1));
-            myGame.gameWorld.AddCell(new CellLocation(location, 1, 2));
-            myGame.gameWorld.AddCell(new CellLocation(location, 3, 2));
-            myGame.gameWorld.AddCell(new CellLocation(location, 2, 3));
-            myGame.gameWorld.AddCell(new CellLocation(location, 3, 3));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 3, 1));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, 2));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 3, 2));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 2, 3));
+            myGame.initialGameWorld.AddCell(new CellLocation(location, 3, 3));
         }
 
         private static void Draw(GameWorld world)
@@ -75,7 +75,7 @@ namespace ConwaysGameOfLife.Kata
             Console.Clear();
             Console.CursorVisible = false;
 
-            foreach (var cellLocation in world.LocationOfLivingCellsInWorld.Values)
+            foreach (var cellLocation in world.CellLocationsOfLivingCells.Values)
             {
                 if ((cellLocation.X <= -1) || (cellLocation.Y <= -1)) continue;
                 Console.SetCursorPosition(cellLocation.X, cellLocation.Y);
