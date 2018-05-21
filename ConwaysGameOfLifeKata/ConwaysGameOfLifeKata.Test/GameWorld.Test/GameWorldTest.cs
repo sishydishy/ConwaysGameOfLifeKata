@@ -31,7 +31,7 @@ namespace ConwaysGameOfLifeKata.Test
             world.AddCell(new CellLocation(1,2));
             world.AddCell(new CellLocation());
             world.AddCell(new CellLocation(0,1));
-            var result = world.GetCellLocationsOfNeighbouringCells(cellLocation);
+            var result = world.FindsIntersectingCellLocationsOfCurrentCellFromGeneratedNeighboursAndLivingCellsInTheWorld(cellLocation);
             Assert.Equal(3, result);
         }
        

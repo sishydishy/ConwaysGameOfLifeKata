@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
 using System.Threading;
 using ConwaysGameOfLifeKata.Kata;
 
@@ -18,42 +19,31 @@ namespace ConwaysGameOfLife.Kata
             CreateBlinkerPattern(myGame, new CellLocation(100, 20));
             CreateGliderPattern(myGame, new CellLocation(15, 1));
             CreateGliderPattern(myGame, new CellLocation(7, 14));
-            CreateBlockerPattern(myGame, new CellLocation(20,10));
-            CreateBlockerPattern(myGame, new CellLocation(20,90));
-            CreateBlockerPattern(myGame, new CellLocation(20,20));
-            CreateBlockerPattern(myGame, new CellLocation(20,50));
-            CreateToadPattern(myGame, new CellLocation(1,1));
-
-
+            CreateBlockerPattern(myGame, new CellLocation(20, 10));
+            
             while (true)
             {
                 myGame.gameWorld = myGame.Evolve();
                 Draw(myGame.gameWorld);
-                Thread.Sleep(1000);
-
-//                if (Console.ReadKey().KeyChar== 'q')
-//                {
-//                    return;
-//                }
+                Thread.Sleep(50);
             }
         }
-
 
         private static void CreateBlinkerPattern(GameEngine myGame, CellLocation location)
         {
             myGame.gameWorld.AddCell(new CellLocation(location, 1, 1));
             myGame.gameWorld.AddCell(new CellLocation(location, 1, 2));
-            myGame.gameWorld.AddCell(new CellLocation(location, 1, 3));            
+            myGame.gameWorld.AddCell(new CellLocation(location, 1, 3));
         }
-        
+
         private static void CreateBlockerPattern(GameEngine myGame, CellLocation location)
         {
             myGame.gameWorld.AddCell(new CellLocation(location, 0, 0));
             myGame.gameWorld.AddCell(new CellLocation(location, 1, 0));
             myGame.gameWorld.AddCell(new CellLocation(location, 0, -1));
-            myGame.gameWorld.AddCell(new CellLocation(location, 1, -1));            
+            myGame.gameWorld.AddCell(new CellLocation(location, 1, -1));
         }
-        
+
         private static void CreateToadPattern(GameEngine myGame, CellLocation location)
         {
             myGame.gameWorld.AddCell(new CellLocation(location, 0, 0));
@@ -61,10 +51,9 @@ namespace ConwaysGameOfLife.Kata
             myGame.gameWorld.AddCell(new CellLocation(location, 0, 2));
             myGame.gameWorld.AddCell(new CellLocation(location, -1, 1));
             myGame.gameWorld.AddCell(new CellLocation(location, -1, 2));
-            myGame.gameWorld.AddCell(new CellLocation(location, -1, 3));            
+            myGame.gameWorld.AddCell(new CellLocation(location, -1, 3));
         }
-        
-        
+
         private static void CreateGliderPattern(GameEngine myGame, CellLocation location)
         {
             myGame.gameWorld.AddCell(new CellLocation(location, 3, 1));
@@ -80,19 +69,13 @@ namespace ConwaysGameOfLife.Kata
             Console.ForegroundColor = ConsoleColor.White;
             Console.Clear();
             Console.CursorVisible = false;
-            foreach (var cellLocation in world.LocationOfCellsInWorld.Values)
+
+            foreach (var cellLocation in world.LocationOfLivingCellsInWorld.Values)
             {
                 if ((cellLocation.X <= -1) || (cellLocation.Y <= -1)) continue;
                 Console.SetCursorPosition(cellLocation.X, cellLocation.Y);
-
                 Console.WriteLine("X");
-                
-                
             }
-
-
         }
-
     }
 }
-    

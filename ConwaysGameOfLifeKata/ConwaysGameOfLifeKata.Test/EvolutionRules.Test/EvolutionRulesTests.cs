@@ -6,16 +6,19 @@ namespace ConwaysGameOfLifeKata.Test
 {
     public class EvolutionRulesTests
     {
-        
+        private readonly LiveEvolutionRules _liveEvolutionRules;
+
+        public EvolutionRulesTests()
+        {
+            _liveEvolutionRules = new LiveEvolutionRules();
+        }
+
         [Theory]
         [InlineData(2)]
         [InlineData(3)]
         public void GivenALiveCellWithTwoOrThreeNeighboursThenLiveCellShouldLive(int neighbour)
         {
-            var liveEvolutionRules = new LiveEvolutionRules();
-
-
-            var result = liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(neighbour);
+            var result = _liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(neighbour);
 
             Assert.True(result);
         }
@@ -25,10 +28,7 @@ namespace ConwaysGameOfLifeKata.Test
         [InlineData(4)]
         public void GivenALiveCellWithLessThanTwoOrMoreThanThreeNeighboursThenLiveCellShouldDie(int neighbour)
         {
-            var liveEvolutionRules = new LiveEvolutionRules();
-
-
-            var result = liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(neighbour);
+            var result = _liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(neighbour);
 
             Assert.False(result);
         }
@@ -37,8 +37,8 @@ namespace ConwaysGameOfLifeKata.Test
         public void GivenADeadCellWithThreeNeighboursThenDeadCellShouldLive()
         {
             var deadEvolutionRules = new DeadEvolutionRules();
-
             var result = deadEvolutionRules.CellStateBasedOnNumberOfNeighbours(3);
+            
             Assert.True(result);
         }
     }

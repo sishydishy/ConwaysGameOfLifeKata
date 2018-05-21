@@ -5,15 +5,18 @@ namespace ConwaysGameOfLifeKata.Test
 {
     public class GeneratingNeighbours
     {
-
+        public string CreateKey(CellLocation cellLocation)
+        {
+            return cellLocation.ToString();
+        }
+        
         public Dictionary<string,CellLocation> GenerateSurroundingCells(CellLocation cellLocation)
         {
             var cellLocationOfNeighbouringCells = new Dictionary<string, CellLocation>();
             IterateXAndYCoordinatesForNeighbouringCellLocations(cellLocation, cellLocationOfNeighbouringCells);
-
             return cellLocationOfNeighbouringCells;
         }
-
+                
         private void IterateXAndYCoordinatesForNeighbouringCellLocations(CellLocation cellLocation,
             IDictionary<string, CellLocation> cellLocationOfNeighbouringCells)
         {
@@ -39,11 +42,6 @@ namespace ConwaysGameOfLifeKata.Test
         private bool ChecksIfNewCellLocationIsNotEqualToCurrentCellLocation(CellLocation cellLocation, CellLocation newCellLocation)
         {
             return !CreateKey(cellLocation).Equals(CreateKey(newCellLocation));
-        }
-
-        public string CreateKey(CellLocation cellLocation)
-        {
-            return cellLocation.ToString();
         }
     }
 }

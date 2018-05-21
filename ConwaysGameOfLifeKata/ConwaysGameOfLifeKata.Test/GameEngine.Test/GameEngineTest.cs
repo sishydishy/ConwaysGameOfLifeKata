@@ -36,7 +36,7 @@ namespace ConwaysGameOfLifeKata.Test
             gameEngine.gameWorld.AddCell(bottomCellLocation);
             gameEngine.gameWorld.AddCell(cellLocation);
            
-            var result = gameEngine.Evolve().LocationOfCellsInWorld.Values.Count;
+            var result = gameEngine.Evolve().LocationOfLivingCellsInWorld.Values.Count;
             Assert.Equal(0,result);
         }
 
@@ -54,7 +54,7 @@ namespace ConwaysGameOfLifeKata.Test
 
             
             
-            Assert.False(gameEngine.Evolve().LocationOfCellsInWorld.ContainsValue(loc1));
+            Assert.False(gameEngine.Evolve().LocationOfLivingCellsInWorld.ContainsValue(loc1));
 
         }
     }

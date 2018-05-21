@@ -6,12 +6,9 @@ namespace ConwaysGameOfLifeKata.Kata
 {
     public class CellLocation
     {
-       
-        private string Key => string.Format("{0},{1}", X, Y);
-
         public int X { get; }
         public int Y { get; }
-
+        private string Key => string.Format("{0},{1}", X, Y);
 
         public CellLocation()
         {
@@ -22,20 +19,17 @@ namespace ConwaysGameOfLifeKata.Kata
         public CellLocation(CellLocation addToCellLocation, int x, int y) : this(addToCellLocation.X + x,
             addToCellLocation.Y + y)
         {
-            
         }
-
 
         public CellLocation(int x, int y)
         {
             X = x;
             Y = y;
         }
+
         public override string ToString()
         {
             return Key;
         }
-        
-
     }
 }
