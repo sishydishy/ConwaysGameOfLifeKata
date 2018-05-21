@@ -17,9 +17,14 @@ namespace ConwaysGameOfLife.Kata
         {
             var myGame = new GameEngine();
             CreateBlinkerPattern(myGame, new CellLocation(100, 20));
+            CreateBlinkerPattern(myGame, new CellLocation(25, 10));
+            CreateBlinkerPattern(myGame, new CellLocation(5, 15));
             CreateGliderPattern(myGame, new CellLocation(15, 1));
             CreateGliderPattern(myGame, new CellLocation(7, 14));
             CreateBlockerPattern(myGame, new CellLocation(20, 10));
+            CreateBlockerPattern(myGame, new CellLocation(20, 23));
+            CreateBlockerPattern(myGame, new CellLocation(93, 25));
+            CreateToadPattern(myGame, new CellLocation(90,25));
             
             while (true)
             {
@@ -74,7 +79,7 @@ namespace ConwaysGameOfLife.Kata
             {
                 if ((cellLocation.X <= -1) || (cellLocation.Y <= -1)) continue;
                 Console.SetCursorPosition(cellLocation.X, cellLocation.Y);
-                Console.WriteLine("X");
+                Console.WriteLine("\u25A0");
             }
         }
     }

@@ -21,21 +21,21 @@ namespace ConwaysGameOfLifeKata.Kata
         
         public void AddCell(CellLocation cellLocation)
         {
-            if (ChecksIfWorldAlreadyHasCellThatIsBeingAdded(cellLocation))
+            if (WorldDoesNotHaveCellAt(cellLocation))
             {
-                LocationOfLivingCellsInWorld.Add(_generateCellLocationOfNeighbouringCells.CreateKey(cellLocation), cellLocation);
+                LocationOfLivingCellsInWorld.Add(_generateCellLocationOfNeighbouringCells.CreateKeyFrom(cellLocation), cellLocation);
             }
         }
 
-        public int FindsIntersectingCellLocationsOfCurrentCellFromGeneratedNeighboursAndLivingCellsInTheWorld(CellLocation cellLocation)
+        public int CountNeighboursOf(CellLocation cellLocation)
         {
             var numberOfNeighbouringCells = _generateCellLocationOfNeighbouringCells.GenerateSurroundingCells(cellLocation);
             return numberOfNeighbouringCells.Keys.Intersect(LocationOfLivingCellsInWorld.Keys).Count();
         }
         
-        private bool ChecksIfWorldAlreadyHasCellThatIsBeingAdded(CellLocation cellLocation)
+        private bool WorldDoesNotHaveCellAt(CellLocation cellLocation)
         {
-            return !LocationOfLivingCellsInWorld.ContainsKey(_generateCellLocationOfNeighbouringCells.CreateKey(cellLocation));
+            return !LocationOfLivingCellsInWorld.ContainsKey(_generateCellLocationOfNeighbouringCells.CreateKeyFrom(cellLocation));
         }
     }
 }

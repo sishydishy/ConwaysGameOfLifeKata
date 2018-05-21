@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ConwaysGameOfLife.Kata;
+﻿using ConwaysGameOfLife.Kata;
 using ConwaysGameOfLifeKata.Test;
 
 namespace ConwaysGameOfLifeKata.Kata
@@ -27,37 +26,37 @@ namespace ConwaysGameOfLifeKata.Kata
 
         private void Iterate(GameWorld newWorld)
         {
-            foreach (var cellLocation in gameWorld.LocationOfLivingCellsInWorld)
+            foreach (var cellLocation in gameWorld.LocationOfLivingCellsInWorld.Values)
             {
                 CheckLivingCellAgainstLiveEvolutionRules(newWorld, cellLocation);
                 DeadCellsOfCurrenCellAndCheckAgainstDeadEvolutionRules(newWorld, cellLocation);
             }
         }
 
-        private void CheckLivingCellAgainstLiveEvolutionRules(GameWorld newWorld, KeyValuePair<string, CellLocation> cellLocation)
+        private void CheckLivingCellAgainstLiveEvolutionRules(GameWorld newWorld, CellLocation cellLocation)
         {
             var neighours =
-                gameWorld.FindsIntersectingCellLocationsOfCurrentCellFromGeneratedNeighboursAndLivingCellsInTheWorld(
-                    cellLocation.Value);
+                gameWorld.CountNeighboursOf(
+                    cellLocation);
 
             if (_liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(neighours))
             {
-                newWorld.AddCell(cellLocation.Value);
+                newWorld.AddCell(cellLocation);
             }
         }
 
-        private void DeadCellsOfCurrenCellAndCheckAgainstDeadEvolutionRules(GameWorld newWorld, KeyValuePair<string, CellLocation> cellLocation)
+        private void DeadCellsOfCurrenCellAndCheckAgainstDeadEvolutionRules(GameWorld newWorld, CellLocation cellLocation)
         {
-            var noCellsInLocation = _generatingNeighbours.GenerateSurroundingCells(cellLocation.Value);
-            foreach (var cells in noCellsInLocation)
+            var noCellsInLocation = _generatingNeighbours.GenerateSurroundingCells(cellLocation);
+            foreach (var cells in noCellsInLocation.Values)
             {
                 var deadNeighours =
-                    gameWorld.FindsIntersectingCellLocationsOfCurrentCellFromGeneratedNeighboursAndLivingCellsInTheWorld(
-                        cells.Value);
+                    gameWorld.CountNeighboursOf(
+                        cells);
 
                 if (_deadEvolutionRules.CellStateBasedOnNumberOfNeighbours(deadNeighours))
                 {
-                    newWorld.AddCell(cells.Value);
+                    newWorld.AddCell(cells);
                 }
             }
         }
