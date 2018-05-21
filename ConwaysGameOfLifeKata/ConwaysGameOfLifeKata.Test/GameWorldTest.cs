@@ -28,8 +28,11 @@ namespace ConwaysGameOfLifeKata.Test
             var world = new GameWorld();
             var cellLocation = new CellLocation(1,1);
             world.AddCell(cellLocation);
+            world.AddCell(new CellLocation(1,2));
+            world.AddCell(new CellLocation());
+            world.AddCell(new CellLocation(0,1));
             var result = world.GetCellLocationsOfNeighbouringCells(cellLocation);
-            Assert.Equal(9, result);
+            Assert.Equal(3, result);
         }
        
     }

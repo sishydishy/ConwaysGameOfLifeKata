@@ -35,5 +35,7 @@ namespace ConwaysGameOfLifeKata.Kata
         {
             return Key;
         }
+        
+
     }
 }
