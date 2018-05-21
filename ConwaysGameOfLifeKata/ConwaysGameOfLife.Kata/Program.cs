@@ -18,6 +18,7 @@ namespace ConwaysGameOfLife.Kata
             CreateBlinkerPattern(myGame, new CellLocation(100, 20));
             CreateGliderPattern(myGame, new CellLocation(15, 1));
             CreateGliderPattern(myGame, new CellLocation(7, 14));
+            CreateBlockerPattern(myGame, new CellLocation(20,10));
 
 
             while (true)
@@ -40,6 +41,16 @@ namespace ConwaysGameOfLife.Kata
             myGame.gameWorld.AddCell(new CellLocation(location, 1, 2));
             myGame.gameWorld.AddCell(new CellLocation(location, 1, 3));            
         }
+        
+        private static void CreateBlockerPattern(GameEngine myGame, CellLocation location)
+        {
+            myGame.gameWorld.AddCell(new CellLocation(location, 0, 0));
+            myGame.gameWorld.AddCell(new CellLocation(location, 1, 0));
+            myGame.gameWorld.AddCell(new CellLocation(location, 0, -1));
+            myGame.gameWorld.AddCell(new CellLocation(location, 1, -1));            
+        }
+        
+        
         
         private static void CreateGliderPattern(GameEngine myGame, CellLocation location)
         {
