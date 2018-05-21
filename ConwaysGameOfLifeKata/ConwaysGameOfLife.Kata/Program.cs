@@ -19,13 +19,17 @@ namespace ConwaysGameOfLife.Kata
             CreateGliderPattern(myGame, new CellLocation(15, 1));
             CreateGliderPattern(myGame, new CellLocation(7, 14));
             CreateBlockerPattern(myGame, new CellLocation(20,10));
+            CreateBlockerPattern(myGame, new CellLocation(20,90));
+            CreateBlockerPattern(myGame, new CellLocation(20,20));
+            CreateBlockerPattern(myGame, new CellLocation(20,50));
+            CreateToadPattern(myGame, new CellLocation(1,1));
 
 
             while (true)
             {
                 myGame.gameWorld = myGame.Evolve();
                 Draw(myGame.gameWorld);
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
 
 //                if (Console.ReadKey().KeyChar== 'q')
 //                {
@@ -50,6 +54,15 @@ namespace ConwaysGameOfLife.Kata
             myGame.gameWorld.AddCell(new CellLocation(location, 1, -1));            
         }
         
+        private static void CreateToadPattern(GameEngine myGame, CellLocation location)
+        {
+            myGame.gameWorld.AddCell(new CellLocation(location, 0, 0));
+            myGame.gameWorld.AddCell(new CellLocation(location, 0, 1));
+            myGame.gameWorld.AddCell(new CellLocation(location, 0, 2));
+            myGame.gameWorld.AddCell(new CellLocation(location, -1, 1));
+            myGame.gameWorld.AddCell(new CellLocation(location, -1, 2));
+            myGame.gameWorld.AddCell(new CellLocation(location, -1, 3));            
+        }
         
         
         private static void CreateGliderPattern(GameEngine myGame, CellLocation location)
