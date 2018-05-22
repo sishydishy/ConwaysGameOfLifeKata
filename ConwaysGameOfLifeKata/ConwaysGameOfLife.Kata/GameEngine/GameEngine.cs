@@ -7,12 +7,12 @@ namespace ConwaysGameOfLifeKata.Kata
     {
         private readonly LiveEvolutionRules _liveEvolutionRules;
         private readonly DeadEvolutionRules _deadEvolutionRules;
-        public GameWorld initialGameWorld { get; set; }
+        public GameWorld CurrentWorld { get; set; }
         private readonly NeighbourGenerator _neighbourGenerator = new NeighbourGenerator();
 
         public GameEngine()
         {
-            initialGameWorld = new GameWorld();
+            CurrentWorld = new GameWorld();
             _liveEvolutionRules = new LiveEvolutionRules();
             _deadEvolutionRules = new DeadEvolutionRules();
         }
@@ -26,7 +26,7 @@ namespace ConwaysGameOfLifeKata.Kata
 
         private void Iterate(GameWorld newWorld)
         {
-            foreach (var cellLocation in initialGameWorld.CellLocationsOfLivingCells.Values)
+            foreach (var cellLocation in CurrentWorld.CellLocationsOfLivingCells.Values)
             {
                 CheckLivingCellAgainstLiveEvolutionRules(newWorld, cellLocation);
                 CheckAgainstDeadEvolutionRules(newWorld, cellLocation);
@@ -36,7 +36,7 @@ namespace ConwaysGameOfLifeKata.Kata
         private void CheckLivingCellAgainstLiveEvolutionRules(GameWorld newWorld, CellLocation cellLocation)
         {
             var neighours =
-                initialGameWorld.CountNeighboursOf(
+                CurrentWorld.CountNeighboursOf(
                     cellLocation);
 
             if (_liveEvolutionRules.CellStateBasedOnNumberOfNeighbours(neighours))
@@ -51,7 +51,7 @@ namespace ConwaysGameOfLifeKata.Kata
             foreach (var cells in noCellsInLocation.Values)
             {
                 var deadNeighours =
-                    initialGameWorld.CountNeighboursOf(
+                    CurrentWorld.CountNeighboursOf(
                         cells);
 
                 if (_deadEvolutionRules.CellStateBasedOnNumberOfNeighbours(deadNeighours))

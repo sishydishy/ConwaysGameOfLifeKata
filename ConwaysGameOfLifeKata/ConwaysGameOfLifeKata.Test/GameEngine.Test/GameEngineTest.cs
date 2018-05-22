@@ -25,7 +25,7 @@ namespace ConwaysGameOfLifeKata.Test
         public void GivenEmptyWorldWithACellsWhenWorldIsIteratedThenReturnAsEmpty()
         {
             var cellLocation = new CellLocation();
-            _gameEngine.initialGameWorld.AddCell(cellLocation);
+            _gameEngine.CurrentWorld.AddCell(cellLocation);
             var result = _gameEngine.Evolve();
             
             Assert.True(result.IsEmpty); 
@@ -36,8 +36,8 @@ namespace ConwaysGameOfLifeKata.Test
         {
             var bottomCellLocation = new CellLocation(1,1);
             var cellLocation = new CellLocation(1,2);            
-            _gameEngine.initialGameWorld.AddCell(bottomCellLocation);
-            _gameEngine.initialGameWorld.AddCell(cellLocation);
+            _gameEngine.CurrentWorld.AddCell(bottomCellLocation);
+            _gameEngine.CurrentWorld.AddCell(cellLocation);
             var result = _gameEngine.Evolve().CellLocationsOfLivingCells.Values.Count;
             
             Assert.Equal(0,result);
@@ -48,9 +48,9 @@ namespace ConwaysGameOfLifeKata.Test
         {
             var cellLocation1 = new CellLocation(1, 1);
             var cellLocation2 = new CellLocation(1,2);
-            _gameEngine.initialGameWorld.AddCell(cellLocation1);
-            _gameEngine.initialGameWorld.AddCell(cellLocation2);
-            _gameEngine.initialGameWorld.AddCell(new CellLocation(1,3));
+            _gameEngine.CurrentWorld.AddCell(cellLocation1);
+            _gameEngine.CurrentWorld.AddCell(cellLocation2);
+            _gameEngine.CurrentWorld.AddCell(new CellLocation(1,3));
             
             var newNeighbour1 = "0,2";
             var newNeighbour2 = "2,2";

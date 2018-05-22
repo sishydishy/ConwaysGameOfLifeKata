@@ -16,6 +16,18 @@ namespace ConwaysGameOfLife.Kata
         private static void ExecuteConwaysGameOfLife()
         {
             var myGame = new GameEngine();
+            CreatePresetPatternsInto(myGame);
+
+            while (true)
+            {
+                myGame.CurrentWorld = myGame.Evolve();
+                Draw(myGame.CurrentWorld);
+                Thread.Sleep(50);
+            }
+        }
+
+        private static void CreatePresetPatternsInto(GameEngine myGame)
+        {
             CreateBlinkerPattern(myGame, new CellLocation(100, 20));
             CreateBlinkerPattern(myGame, new CellLocation(25, 10));
             CreateBlinkerPattern(myGame, new CellLocation(5, 15));
@@ -25,47 +37,40 @@ namespace ConwaysGameOfLife.Kata
             CreateBlockerPattern(myGame, new CellLocation(20, 23));
             CreateBlockerPattern(myGame, new CellLocation(93, 25));
             CreateToadPattern(myGame, new CellLocation(90, 25));
-
-            while (true)
-            {
-                myGame.initialGameWorld = myGame.Evolve();
-                Draw(myGame.initialGameWorld);
-                Thread.Sleep(50);
-            }
         }
 
         private static void CreateBlinkerPattern(GameEngine myGame, CellLocation location)
         {
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, 1));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, 2));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, 3));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 1, 1));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 1, 2));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 1, 3));
         }
 
         private static void CreateBlockerPattern(GameEngine myGame, CellLocation location)
         {
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 0, 0));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, 0));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 0, -1));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, -1));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 0, 0));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 1, 0));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 0, -1));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 1, -1));
         }
 
         private static void CreateToadPattern(GameEngine myGame, CellLocation location)
         {
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 0, 0));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 0, 1));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 0, 2));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, -1, 1));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, -1, 2));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, -1, 3));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 0, 0));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 0, 1));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 0, 2));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, -1, 1));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, -1, 2));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, -1, 3));
         }
 
         private static void CreateGliderPattern(GameEngine myGame, CellLocation location)
         {
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 3, 1));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 1, 2));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 3, 2));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 2, 3));
-            myGame.initialGameWorld.AddCell(new CellLocation(location, 3, 3));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 3, 1));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 1, 2));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 3, 2));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 2, 3));
+            myGame.CurrentWorld.AddCell(new CellLocation(location, 3, 3));
         }
 
         private static void Draw(GameWorld world)
