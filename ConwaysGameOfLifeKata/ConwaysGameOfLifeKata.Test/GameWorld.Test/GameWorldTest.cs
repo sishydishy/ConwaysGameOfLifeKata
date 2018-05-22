@@ -6,32 +6,39 @@ namespace ConwaysGameOfLifeKata.Test
 {
     public class GameWorldTest
     {
+        private readonly GameWorld _gameWorld;
+
+        public GameWorldTest()
+        {
+            _gameWorld = new GameWorld();
+        }
+
         [Fact]
         public void GivenEmptyWorldThenReturnAsTrue()
         {
-            var world = new GameWorld();
-            var result = world.IsEmpty;
+            var result = _gameWorld.IsEmpty;
+            
             Assert.True(result);
-
         }
 
         [Fact]
         public void GivenACellWhenAddedToWorldThenReturnAsTrue()
         {
-            var world = new GameWorld();
-            world.AddCell(new CellLocation());
-            Assert.Equal(true, !world.IsEmpty);
+            _gameWorld.AddCell(new CellLocation());
+            
+            Assert.Equal(true, !_gameWorld.IsEmpty);
         }
+        
         [Fact]
         public void GivenACellLocationThenGetCellLocationOfNeighbours()
         {
-            var world = new GameWorld();
             var cellLocation = new CellLocation(1,1);
-            world.AddCell(cellLocation);
-            world.AddCell(new CellLocation(1,2));
-            world.AddCell(new CellLocation());
-            world.AddCell(new CellLocation(0,1));
-            var result = world.CountNeighboursOf(cellLocation);
+            _gameWorld.AddCell(cellLocation);
+            _gameWorld.AddCell(new CellLocation(1,2));
+            _gameWorld.AddCell(new CellLocation());
+            _gameWorld.AddCell(new CellLocation(0,1));
+            var result = _gameWorld.CountNeighboursOf(cellLocation);
+            
             Assert.Equal(3, result);
         }
        

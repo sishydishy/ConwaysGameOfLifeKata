@@ -13,6 +13,7 @@ namespace ConwaysGameOfLifeKata.Test
             var generatingNeighbours = new NeighbourGenerator();
             var cellLocation = new CellLocation(1, 1);
             var result = generatingNeighbours.GenerateSurroundingCellLocations(cellLocation);
+            
             Assert.Equal(8, result.Count);
         } 
 }
